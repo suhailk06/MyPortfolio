@@ -1,411 +1,829 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Alex Rivera · simple portfolio</title>
-  <style>
-    /* ---------- RESET & GLOBAL ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio · ML & Django Developer</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ---------- RESET & GLOBAL ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-      background: #f8fafc;
-      color: #0b1e2e;
-      line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+            background-color: #f9fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
 
-    /* ---------- TYPOGRAPHY & LINKS ---------- */
-    h1, h2, h3 {
-      font-weight: 600;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
+        /* smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
 
-    h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-      color: #0b1e2e;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 3px solid #cbd5e1;
-      padding-bottom: 0.5rem;
-      display: inline-block;
-    }
+        /* ---------- TYPOGRAPHY & LINKS ---------- */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.3;
+        }
 
-    h3 {
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
-      color: #0f2b3c;
-    }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.25rem;
+            position: relative;
+            display: inline-block;
+        }
 
-    a {
-      color: #1e6f9f;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 2px;
+        }
 
-    a:hover {
-      color: #0a4b6e;
-      text-decoration: underline;
-    }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    /* ---------- LAYOUT CONTAINERS ---------- */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
+        /* ---------- BUTTONS ---------- */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.75rem;
+            border-radius: 40px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1.5px solid transparent;
+        }
 
-    /* ---------- HEADER / NAV ---------- */
-    header {
-      background: #ffffff;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-      border-bottom: 1px solid #e2e8f0;
-    }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 8px 16px -6px rgba(37, 99, 235, 0.3);
+        }
 
-    .header-flex {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(37, 99, 235, 0.4);
+        }
 
-    .logo {
-      font-size: 1.6rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      color: #0b1e2e;
-    }
+        .btn-outline {
+            border: 1.5px solid #2563eb;
+            color: #2563eb;
+            background: transparent;
+        }
 
-    .logo span {
-      color: #1e6f9f;
-    }
+        .btn-outline:hover {
+            background: #2563eb10;
+            transform: translateY(-2px);
+        }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
+        /* ---------- HEADER / NAV ---------- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #e2e8f0;
+        }
 
-    nav a {
-      font-weight: 500;
-      padding: 0.25rem 0;
-      border-bottom: 2px solid transparent;
-    }
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    nav a:hover {
-      text-decoration: none;
-      border-bottom-color: #1e6f9f;
-      color: #0b1e2e;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            font-weight: 500;
+        }
 
-    /* ---------- HERO / INTRO ---------- */
-    .hero {
-      background: linear-gradient(135deg, #ffffff 0%, #f1f7fc 100%);
-      border-radius: 2rem;
-      padding: 3rem 2.5rem;
-      margin: 1.5rem 0 2rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.02);
-      border: 1px solid #e9f0f5;
-    }
+        .nav-links a {
+            font-size: 1rem;
+            color: #334155;
+            transition: color 0.2s;
+        }
 
-    .hero p {
-      font-size: 1.25rem;
-      max-width: 700px;
-      color: #1f4b63;
-      margin-bottom: 1.8rem;
-    }
+        .nav-links a:hover {
+            color: #2563eb;
+        }
 
-    .hero .tagline {
-      font-size: 1.1rem;
-      font-weight: 400;
-      color: #2c5770;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            padding: 5rem 0 4rem;
+        }
 
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.8rem;
-      border-radius: 40px;
-      font-weight: 600;
-      background: #ffffff;
-      color: #0b1e2e;
-      border: 1.5px solid #cbd5e1;
-      transition: all 0.2s;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
-    }
+        .hero-content {
+            flex: 1 1 400px;
+        }
 
-    .btn-primary {
-      background: #1e6f9f;
-      border-color: #1e6f9f;
-      color: white;
-      box-shadow: 0 6px 14px rgba(30, 111, 159, 0.25);
-    }
+        .hero-badge {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #2563eb;
+            font-size: 0.875rem;
+            font-weight: 600;
+            padding: 0.35rem 1rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.3px;
+        }
 
-    .btn-primary:hover {
-      background: #0e547b;
-      border-color: #0e547b;
-      text-decoration: none;
-      color: white;
-    }
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1.25rem;
+        }
 
-    .btn:hover {
-      text-decoration: none;
-      border-color: #94a3b8;
-    }
+        .hero-highlight {
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-    /* ---------- SECTION CARDS / GRIDS ---------- */
-    section {
-      margin: 3rem 0;
-    }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #475569;
+            margin-bottom: 2rem;
+            max-width: 550px;
+        }
 
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
-    }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
 
-    .card {
-      background: #ffffff;
-      padding: 1.8rem 1.5rem;
-      border-radius: 1.5rem;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
-      border: 1px solid #e9edf2;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
 
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 30px -10px rgba(0, 30, 50, 0.08);
-      border-color: #cbdde9;
-    }
+        .stat-item h3 {
+            font-size: 1.8rem;
+            color: #0f172a;
+            margin-bottom: 0.25rem;
+        }
 
-    .card h3 {
-      margin-bottom: 0.75rem;
-    }
+        .stat-item p {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 0;
+        }
 
-    .card p {
-      color: #2d4e62;
-      margin-bottom: 1.2rem;
-    }
+        .hero-avatar {
+            flex: 0 0 280px;
+            display: flex;
+            justify-content: center;
+        }
 
-    .project-link {
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      margin-top: 0.5rem;
-    }
+        .avatar-box {
+            width: 280px;
+            height: 280px;
+            background: linear-gradient(145deg, #dbeafe, #ede9fe);
+            border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 40px -20px rgba(37, 99, 235, 0.4);
+            position: relative;
+        }
 
-    .project-link::after {
-      content: "→";
-      font-size: 1.1rem;
-      transition: transform 0.2s;
-    }
+        .avatar-box i {
+            font-size: 7rem;
+            color: #2563eb;
+            opacity: 0.9;
+        }
 
-    .project-link:hover::after {
-      transform: translateX(4px);
-    }
+        /* ---------- SECTIONS (general) ---------- */
+        section {
+            padding: 5rem 0;
+        }
 
-    /* ---------- SKILLS (simple tag style) ---------- */
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
+        .section-subtitle {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
 
-    .skill-tag {
-      background: #e8f0f7;
-      color: #0f3b52;
-      font-weight: 500;
-      padding: 0.5rem 1.2rem;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      border: 1px solid #c7dae8;
-    }
+        /* ---------- SKILLS ---------- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
 
-    /* ---------- FOOTER ---------- */
-    footer {
-      margin-top: auto;
-      background: #ffffff;
-      border-top: 1px solid #e2e8f0;
-      text-align: center;
-      padding: 2rem 1.5rem;
-      color: #4d6272;
-      font-size: 0.95rem;
-    }
+        .skill-card {
+            background: white;
+            padding: 1.75rem 1.25rem;
+            border-radius: 24px;
+            box-shadow: 0 5px 20px -8px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eef2f6;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-align: center;
+        }
 
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1.8rem;
-      margin-bottom: 1rem;
-    }
+        .skill-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.15);
+            border-color: #cbd5e1;
+        }
 
-    /* ---------- UTILITY & RESPONSIVE ---------- */
-    .text-center {
-      text-align: center;
-    }
+        .skill-card i {
+            font-size: 2.2rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
 
-    .mt-4 {
-      margin-top: 2rem;
-    }
+        .skill-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
 
-    @media (max-width: 640px) {
-      h1 {
-        font-size: 2.2rem;
-      }
+        .skill-card p {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
 
-      h2 {
-        font-size: 1.8rem;
-      }
+        /* ---------- PROJECTS ---------- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
 
-      .hero {
-        padding: 2rem 1.5rem;
-      }
+        .project-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eef2f6;
+            transition: all 0.25s;
+        }
 
-      .header-flex {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 40px -18px rgba(37, 99, 235, 0.2);
+            border-color: #d9e2ef;
+        }
 
-      nav {
-        width: 100%;
-        justify-content: space-between;
-      }
+        .project-header {
+            height: 150px;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #2563eb;
+        }
 
-      .btn-group {
-        flex-direction: column;
-        align-items: stretch;
-      }
+        .project-body {
+            padding: 1.75rem;
+        }
 
-      .btn {
-        text-align: center;
-      }
-    }
-  </style>
+        .project-body h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-body p {
+            color: #475569;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tags span {
+            background: #eef2ff;
+            color: #2563eb;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.9rem;
+            border-radius: 30px;
+            letter-spacing: 0.2px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .project-links a {
+            color: #2563eb;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .project-links a i {
+            font-size: 0.8rem;
+        }
+
+        /* ---------- EXPERIENCE ---------- */
+        .exp-item {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 5px 15px -10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+
+        .exp-icon {
+            background: #e0e7ff;
+            width: 55px;
+            height: 55px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: #2563eb;
+            flex-shrink: 0;
+        }
+
+        .exp-content {
+            flex: 1;
+        }
+
+        .exp-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .exp-meta {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .exp-meta i {
+            margin-right: 0.25rem;
+            color: #2563eb;
+        }
+
+        .exp-content ul {
+            list-style: none;
+        }
+
+        .exp-content li {
+            margin-bottom: 0.6rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #334155;
+        }
+
+        .exp-content li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        /* ---------- CONTACT / FOOTER ---------- */
+        .contact-section {
+            background: white;
+            border-radius: 40px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 1rem;
+        }
+
+        .contact-section h2::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .contact-section p {
+            color: #475569;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-weight: 500;
+            color: #1e293b;
+            transition: color 0.2s;
+            background: #f1f5f9;
+            padding: 0.7rem 1.5rem;
+            border-radius: 40px;
+        }
+
+        .contact-links a i {
+            color: #2563eb;
+            font-size: 1.2rem;
+        }
+
+        .contact-links a:hover {
+            color: #2563eb;
+            background: #e0e7ff;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 3rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-grid {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-avatar {
+                flex: 0 0 auto;
+            }
+
+            .avatar-box {
+                width: 200px;
+                height: 200px;
+            }
+
+            .avatar-box i {
+                font-size: 5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .exp-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .contact-links a {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-stats {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: center;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container header-flex">
-      <div class="logo">alex<span>rivera</span></div>
-      <nav>
-        <a href="#work">Work</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="container">
-
-    <!-- HERO / INTRO -->
-    <div class="hero">
-      <div class="tagline">Product designer & front‑end</div>
-      <h1>Building simple, human<br>digital experiences.</h1>
-      <p>
-        I’m Alex — I craft clean interfaces and thoughtful interactions. 
-        Currently designing & coding at the intersection of clarity and delight.
-      </p>
-      <div class="btn-group">
-        <a href="#work" class="btn btn-primary">See my work</a>
-        <a href="#contact" class="btn">Get in touch</a>
-      </div>
-    </div>
-
-    <!-- PROJECTS SECTION -->
-    <section id="work">
-      <h2>Selected projects</h2>
-      <div class="grid-3">
-        <!-- project 1 -->
-        <div class="card">
-          <h3>Flowspace</h3>
-          <p>A minimal task manager that helps remote teams stay in sync without the noise. Clean UI, real-time updates.</p>
-          <a href="#" class="project-link">View case study</a>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">dev.ml</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
         </div>
-        <!-- project 2 -->
-        <div class="card">
-          <h3>EcoPulse</h3>
-          <p>Dashboard concept for tracking personal carbon footprint. Visual, friendly, and data‑driven.</p>
-          <a href="#" class="project-link">View case study</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-code"></i> ML + Django</span>
+                <h1>
+                    Building intelligent <br>
+                    <span class="hero-highlight">web applications</span>
+                </h1>
+                <p>
+                    I'm a machine learning enthusiast and Django developer, crafting data-driven 
+                    backends and clean, scalable APIs. I turn models into products.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View projects <i class="fas fa-arrow-right" style="margin-left: 6px;"></i></a>
+                    <a href="#contact" class="btn btn-outline">Let's talk</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h3>5+</h3>
+                        <p>ML models deployed</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>3+</h3>
+                        <p>Django projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2+</h3>
+                        <p>Years coding</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-avatar">
+                <div class="avatar-box">
+                    <!-- <i class="fas fa-robot"></i> -->
+                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7Z-4BV2rAziKSe-j8k1yQLgoGSGIbmOZ1a5lI4Jqlw&s=10" alt="Avatar" style="width: 100%; height: 100%">
+                </div>
+            </div>
         </div>
-        <!-- project 3 -->
-        <div class="card">
-          <h3>TypeFlow</h3>
-          <p>A typography‑first blog template built with CSS grid and fluid type. Lightweight and accessible.</p>
-          <a href="#" class="project-link">View case study</a>
-        </div>
-      </div>
-    </section>
+    </header>
 
     <!-- SKILLS SECTION -->
-    <section id="skills" style="margin-top: 3.5rem;">
-      <h2>Skills & tools</h2>
-      <div class="skill-list">
-        <span class="skill-tag">HTML5</span>
-        <span class="skill-tag">CSS3 / Flexbox / Grid</span>
-        <span class="skill-tag">Responsive design</span>
-        <span class="skill-tag">Figma</span>
-        <span class="skill-tag">UI/UX principles</span>
-        <span class="skill-tag">Accessibility</span>
-        <span class="skill-tag">Git & GitHub</span>
-        <span class="skill-tag">JavaScript (basic)</span>
-      </div>
+    <section id="skills">
+        <div class="container">
+            <h2>Tech stack</h2>
+            <p class="section-subtitle">Tools and technologies I work with daily — from model training to deployment.</p>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-python"></i>
+                    <h4>Python</h4>
+                    <p>Core language, OOP, scripting</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-brain"></i>
+                    <h4>Machine Learning</h4>
+                    <p>scikit-learn, TensorFlow, PyTorch</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-database"></i>
+                    <h4>Django</h4>
+                    <p>DRF, ORM, auth, REST APIs</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h4>Data Analysis</h4>
+                    <p>Pandas, NumPy, Matplotlib</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-cloud"></i>
+                    <h4>Deployment</h4>
+                    <p>Docker, Heroku, AWS basics</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-code-branch"></i>
+                    <h4>Version Control</h4>
+                    <p>Git, GitHub, GitLab</p>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- CONTACT / FOOTER CTA -->
-    <section id="contact" style="margin-top: 3.5rem; margin-bottom: 2rem;">
-      <h2>Let’s connect</h2>
-      <p style="font-size: 1.2rem; margin-bottom: 1.5rem; color: #1f4b63;">
-        I’m open to freelance projects and full‑time opportunities.
-      </p>
-      <div class="btn-group">
-        <a href="mailto:alex@example.com" class="btn btn-primary">alex@example.com</a>
-        <a href="#" class="btn">LinkedIn</a>
-        <a href="#" class="btn">GitHub</a>
-      </div>
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+        <div class="container">
+            <h2>Featured projects</h2>
+            <p class="section-subtitle">A blend of machine learning pipelines and Django backends.</p>
+            <div class="projects-grid">
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>Customer Churn Predictor</h3>
+                        <p>ML model (XGBoost) + Django REST API. Predicts churn probability and returns actionable insights.</p>
+                        <div class="tech-tags">
+                            <span>Django REST</span>
+                            <span>scikit-learn</span>
+                            <span>Pandas</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Code</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>Image Classifier API</h3>
+                        <p>CNN model (TensorFlow) served via Django. Upload an image and get top-3 predictions with confidence.</p>
+                        <div class="tech-tags">
+                            <span>TensorFlow</span>
+                            <span>Django</span>
+                            <span>Pillow</span>
+                            <span>Docker</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Code</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                    <div class="project-body">
+                        <h3>Sentiment Analyzer</h3>
+                        <p>NLP pipeline with Django backend. Analyze text sentiment (positive/negative) in real time.</p>
+                        <div class="tech-tags">
+                            <span>NLTK</span>
+                            <span>Django</span>
+                            <span>React (front)</span>
+                            <span>Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Code</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 
-  </main>
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <p class="section-subtitle">Hands-on roles where I applied ML and Django in production.</p>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-links">
-        <a href="#work">Work</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-        <a href="#">Resume</a>
-      </div>
-      <p>© 2025 Alex Rivera · built with simple HTML & CSS</p>
-    </div>
-  </footer>
+            <div class="exp-item">
+                <div class="exp-icon"><i class="fas fa-laptop-code"></i></div>
+                <div class="exp-content">
+                    <h3>Machine Learning Intern</h3>
+                    <div class="exp-meta">
+                        <span><i class="fas fa-building"></i> DataMinds Analytics</span>
+                        <span><i class="fas fa-calendar-alt"></i> Jun 2024 – Present</span>
+                    </div>
+                    <ul>
+                        <li>Built a recommendation engine using collaborative filtering, integrated into a Django dashboard.</li>
+                        <li>Improved model accuracy by 18% through feature engineering and hyperparameter tuning.</li>
+                        <li>Created REST endpoints to serve predictions to the frontend team.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-icon"><i class="fab fa-django"></i></div>
+                <div class="exp-content">
+                    <h3>Django Developer (Freelance)</h3>
+                    <div class="exp-meta">
+                        <span><i class="fas fa-user-tie"></i> Self-employed</span>
+                        <span><i class="fas fa-calendar-alt"></i> Jan 2023 – May 2024</span>
+                    </div>
+                    <ul>
+                        <li>Developed 3+ full-stack Django apps with authentication, PostgreSQL, and REST APIs.</li>
+                        <li>Integrated ML models into Django views for real-time predictions.</li>
+                        <li>Deployed applications on Heroku and AWS EC2 with Docker.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exp-item">
+                <div class="exp-icon"><i class="fas fa-graduation-cap"></i></div>
+                <div class="exp-content">
+                    <h3>ML & Web Development Projects</h3>
+                    <div class="exp-meta">
+                        <span><i class="fas fa-folder-open"></i> Personal & academic</span>
+                        <span><i class="fas fa-calendar-alt"></i> 2022 – Present</span>
+                    </div>
+                    <ul>
+                        <li>Built a house price prediction API with Django REST and scikit-learn.</li>
+                        <li>Created a movie recommender using collaborative filtering and deployed with Flask (now migrating to Django).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CONTACT / CTA -->
+    <section id="contact">
+        <div class="container">
+            <div class="contact-section">
+                <h2>Let's work together</h2>
+                <p>I'm open to full-time roles, freelance projects, and collaborations in ML + Django.</p>
+                <div class="contact-links">
+                    <a href="mailto:hello@example.com"><i class="fas fa-envelope"></i> hello@example.com</a>
+                    <a href="#"><i class="fab fa-github"></i> github/ml-django</a>
+                    <a href="#"><i class="fab fa-linkedin"></i> linkedin/in/ml-dev</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p>© 2025 · ML & Django Developer Portfolio · Built with HTML & CSS</p>
+        </div>
+    </footer>
 
 </body>
 </html>
