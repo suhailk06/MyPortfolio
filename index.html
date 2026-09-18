@@ -1,214 +1,775 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Nav · Active on Scroll</title>
-    <style>
-        /* ----- GLOBAL RESET & BASE ----- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suhail Portfolio</title>
+  <!-- Font Awesome for icons (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ---------- GLOBAL RESET / RED & BLACK THEME ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html {
-            scroll-behavior: smooth;
-        }
+    body {
+      background-color: #0b0b0b;   /* deep black */
+      color: #f0f0f0;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
 
-        body {
-            background-color:#02060E;
-            color: white;
-            padding-top: 80px;  
-        }
+    /* red accents */
+    :root {
+      --red: #e31b23;
+      --red-dark: #b0101a;
+      --red-glow: rgba(227, 27, 35, 0.3);
+      --black-soft: #1a1a1a;
+      --gray-dark: #2a2a2a;
+      --text-light: #eaeaea;
+      --text-muted: #b0b0b0;
+    }
 
-        nav {
-            position: fixed;
-            top: 20px;      
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;     
-            background-color: #010101; 
-            padding: 0.9rem 2rem;
-            border: 1px solid white;
-            border-radius: 35px;
-            width: auto;
-            min-width: 320px;
-            max-width: 90vw;
-            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
-            z-index: 1000;
-        }
+    a {
+      text-decoration: none;
+      color: var(--red);
+      transition: 0.2s;
+    }
 
-        nav a {
-            text-decoration: none;
-            color: white;               /* default link color */
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            font-size: 1.1rem;
-            padding: 0.25rem 0;
-            transition: color 0.2s, opacity 0.2s;
-        }
+    a:hover {
+      color: #ff4d4d;
+    }
 
-        /* hover stays as before */
-        nav a:hover {
-            opacity: 0.7;
-            color: red;
-        }
+    /* ---------- TYPOGRAPHY & UTILS ---------- */
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
-        /* active link – when section is in view */
-        nav a.active {
-            color: #ff3b3b;            /* bright red for active link */
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
-            position: relative;
-        }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      border-left: 5px solid var(--red);
+      padding-left: 1rem;
+      color: #ffffff;
+    }
 
-        /* small underline indicator (optional, clean look) */
-        nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #ff3b3b;
-            border-radius: 2px;
-            box-shadow: 0 0 8px #ff0000;
-        }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
 
-        nav h1 {
-            background-color:#c50303;
-            width:auto;
-            height: auto;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-        }
+    section {
+      padding: 5rem 0;
+    }
 
-        #home {
-            height: 100vh;
-        }
+    /* ---------- HEADER / NAV ---------- */
+    header {
+      background-color: rgba(10, 10, 10, 0.95);
+      backdrop-filter: blur(6px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--red);
+      padding: 1rem 0;
+    }
 
-    </style>
+    .nav-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--red);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: var(--text-light);
+      font-weight: 500;
+      font-size: 1.1rem;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ffffff;
+      border-bottom-color: var(--red);
+    }
+
+    /* ---------- HERO SECTION ---------- */
+    #hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      background: radial-gradient(circle at 20% 30%, #1e1e1e 0%, #0b0b0b 90%);
+      border-bottom: 1px solid var(--gray-dark);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-text h1 .highlight {
+      color: var(--red);
+      text-shadow: 0 0 15px var(--red-glow);
+    }
+
+    .hero-text .subtitle {
+      font-size: 1.6rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      border-left: 4px solid var(--red);
+      padding-left: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.15rem;
+      color: #cccccc;
+      max-width: 550px;
+      margin-bottom: 2rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.9rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .btn-primary {
+      background-color: var(--red);
+      color: #000000;
+      border-color: var(--red);
+    }
+
+    .btn-primary:hover {
+      background-color: transparent;
+      color: var(--red);
+      box-shadow: 0 0 20px var(--red-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: #ffffff;
+      border: 2px solid #444;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--red);
+      color: var(--red);
+      box-shadow: 0 0 15px rgba(227, 27, 35, 0.3);
+    }
+
+    .hero-avatar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .avatar-box {
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1c1c1c, #0a0a0a);
+      border: 4px solid var(--red);
+      box-shadow: 0 0 40px var(--red-glow);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 6rem;
+      color: var(--red);
+      transition: transform 0.3s;
+    }
+
+    .avatar-box i {
+      filter: drop-shadow(0 0 10px rgba(227, 27, 35, 0.6));
+    }
+
+    .avatar-box:hover {
+      transform: scale(1.02);
+    }
+
+    /* ---------- SKILLS / CSE FOCUS ---------- */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .skill-card {
+      background: #111111;
+      border: 1px solid #2a2a2a;
+      border-radius: 20px;
+      padding: 1.8rem 1rem;
+      text-align: center;
+      transition: all 0.2s;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .skill-card:hover {
+      border-color: var(--red);
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(227, 27, 35, 0.2);
+    }
+
+    .skill-card i {
+      font-size: 2.8rem;
+      color: var(--red);
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.3rem;
+      color: #fff;
+    }
+
+    .skill-card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* ---------- PROJECTS ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: #101010;
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+      border: 1px solid #252525;
+      transition: 0.25s;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .project-card:hover {
+      border-color: var(--red);
+      transform: scale(1.01);
+      box-shadow: 0 18px 28px rgba(227, 27, 35, 0.15);
+    }
+
+    .project-icon {
+      font-size: 2.2rem;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: #ffffff;
+    }
+
+    .project-card p {
+      color: #b9b9b9;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .tech-tags span {
+      background: #1e1e1e;
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      border: 1px solid #333;
+      letter-spacing: 0.3px;
+    }
+
+    .project-link {
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--red);
+      margin-top: auto;
+    }
+
+    .project-link i {
+      transition: transform 0.2s;
+    }
+
+    .project-link:hover i {
+      transform: translateX(6px);
+    }
+
+    /* ---------- EDUCATION / CSE ---------- */
+    .edu-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin-top: 2rem;
+    }
+
+    .edu-item {
+      background: #0e0e0e;
+      border-left: 6px solid var(--red);
+      border-radius: 0 18px 18px 0;
+      padding: 1.8rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: 0.2s;
+    }
+
+    .edu-item:hover {
+      background: #151515;
+      border-left-width: 10px;
+    }
+
+    .edu-info h3 {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-info .institute {
+      color: var(--red);
+      font-weight: 500;
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-info .year {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .edu-grade {
+      background: #1c1c1c;
+      padding: 0.6rem 1.4rem;
+      border-radius: 40px;
+      font-weight: 700;
+      color: #ffffff;
+      border: 1px solid var(--red);
+      font-size: 1rem;
+    }
+
+    /* ---------- CONTACT / FOOTER ---------- */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: space-between;
+      align-items: center;
+      background: #0f0f0f;
+      border-radius: 40px;
+      padding: 3rem 3rem;
+      border: 1px solid #242424;
+      margin-top: 1rem;
+    }
+
+    .contact-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info p {
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .contact-details div {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-size: 1.1rem;
+    }
+
+    .contact-details i {
+      color: var(--red);
+      width: 24px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .social-links a {
+      background: #1a1a1a;
+      color: #fff;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      border: 1px solid #333;
+      transition: 0.2s;
+    }
+
+    .social-links a:hover {
+      background: var(--red);
+      color: #000;
+      border-color: var(--red);
+      transform: scale(1.1);
+      box-shadow: 0 0 20px var(--red-glow);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      border-top: 1px solid #222;
+      color: #7a7a7a;
+      font-size: 0.9rem;
+    }
+
+    footer span {
+      color: var(--red);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text .subtitle {
+        border-left: none;
+        padding-left: 0;
+        border-bottom: 2px solid var(--red);
+        display: inline-block;
+        padding-bottom: 0.5rem;
+      }
+
+      .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-group {
+        justify-content: center;
+      }
+
+      .avatar-box {
+        width: 220px;
+        height: 220px;
+        font-size: 5rem;
+      }
+
+      .nav-flex {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav ul {
+        gap: 1.5rem;
+      }
+
+      .contact-flex {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .contact-details div {
+        justify-content: center;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+
+      .edu-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-text .subtitle {
+        font-size: 1.3rem;
+      }
+
+      nav ul {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <nav>
-        <h1>My Portfolio</h1>
-        <a href="#home" class="nav-link active">Home</a>   <!-- initially active -->
-        <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#contact" class="nav-link">Contact</a>
-    </nav>
-
-    <div class="content">
-        <section id="home">
-            <h1>Home</h1>
-        </section>
-
-        <section id="about">
-            <h1>About</h1>
-        </section>
-        <section id="skills">
-            <h1>Skills</h1>
-        </section>  
-        <section id="projects">
-            <h1>Projects</h1>   
-        </section>
-        <section id="contact">
-            <h1>Contact</h1>
-        </section>
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <div class="container nav-flex">
+      <div class="logo">My Portfolio</div>
+      <nav>
+        <ul>
+          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
+  </header>
 
-    <script>
-        (function() {
-            // Get all sections and nav links
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.nav-link');
+  <main>
+    <!-- HERO SECTION -->
+    <section id="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1>Hi, I'm <span class="highlight">Suhail</h1>
+          <div class="subtitle">CSE Student & Developer</div>
+          <p>Passionate about problem-solving, algorithms, and building clean web experiences. Currently pursuing B.Tech in Computer Science, exploring full-stack and AI.</p>
+          <div class="btn-group">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+            <a href="/MAltaCV.pdf" download class="btn btn-primary" >Download PDF</a>
 
-            // Function to update active class based on scroll position
-            function updateActiveLink() {
-                let currentSectionId = 'home'; // default fallback
+          </div>
+        </div>
+        <div class="hero-avatar">
+          <div class="avatar-box">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                // Find the section that is currently most visible in the viewport
-                // We'll use a threshold: the section whose top is closest to the top of the viewport
-                // but not past the middle, or simply the one that occupies most of the viewport.
-                // A clean approach: find the section whose top is <= window.scrollY + some offset (e.g., 150px)
-                // and whose bottom is > window.scrollY + offset.
-                const scrollPosition = window.scrollY + 150; // offset for fixed nav + breathing room
+    <!-- SKILLS SECTION (CSE FLAVOR) -->
+    <section id="skills">
+      <div class="container">
+        <h2>⚡ Tech Stack & Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <i class="fab fa-java"></i>
+            <h3>Java</h3>
+            <p>DSA, OOPs, Spring</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-python"></i>
+            <h3>Python</h3>
+            <p>ML, Automation</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-js"></i>
+            <h3>JavaScript</h3>
+            <p>React, Node.js</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-database"></i>
+            <h3>DBMS</h3>
+            <p>MySQL, MongoDB</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-code-branch"></i>
+            <h3>DSA</h3>
+            <p>300+ problems</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-git-alt"></i>
+            <h3>Git & CI</h3>
+            <p>GitHub Actions</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                // Iterate from last to first to get the *first* section that contains the scroll position
-                // Actually we want the section that contains the scroll position, if multiple, the one that started last
-                // but let's go from bottom to top to get the last matching section? 
-                // Better: loop and keep the last section whose top <= scrollPosition.
-                let activeSection = sections[0]; // default home
-                for (let i = 0; i < sections.length; i++) {
-                    const section = sections[i];
-                    const sectionTop = section.offsetTop;
-                    const sectionBottom = sectionTop + section.offsetHeight;
+    <!-- PROJECTS SECTION -->
+    <section id="projects" style="background-color: #0d0d0d;">
+      <div class="container">
+        <h2>📁 Featured Projects</h2>
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-robot"></i></div>
+            <h3>AlgoVisualizer</h3>
+            <p>Interactive web app to visualize pathfinding algorithms (Dijkstra, A*, BFS) with adjustable speed and maze generation.</p>
+            <div class="tech-tags">
+              <span>React</span>
+              <span>JavaScript</span>
+              <span>CSS</span>
+            </div>
+            <a href="#" class="project-link">Live Demo <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
+            <h3>StudentDB Manager</h3>
+            <p>Full-stack CRUD application to manage student records, attendance and grades. Role-based access for admin & faculty.</p>
+            <div class="tech-tags">
+              <span>Node.js</span>
+              <span>Express</span>
+              <span>MongoDB</span>
+            </div>
+            <a href="#" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <!-- Project 3 -->
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-brain"></i></div>
+            <h3>Sentiment Analyzer</h3>
+            <p>ML model that classifies movie reviews as positive/negative using NLP and logistic regression with 89% accuracy.</p>
+            <div class="tech-tags">
+              <span>Python</span>
+              <span>scikit-learn</span>
+              <span>NLTK</span>
+            </div>
+            <a href="#" class="project-link">Details <i class="fas fa-arrow-right"></i></a>
+          </div>
+          <!-- Project 4 -->
+          <div class="project-card">
+            <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+            <h3>Weather Dashboard</h3>
+            <p>Clean dashboard showing real-time weather and 5-day forecast using OpenWeather API with dynamic backgrounds.</p>
+            <div class="tech-tags">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JS</span>
+              <span>API</span>
+            </div>
+            <a href="#" class="project-link">Live <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                    // If the scroll position is within this section (with a little tolerance)
-                    // We use a small offset for the bottom? Actually if scrollPosition is between top and bottom, that's it.
-                    // But to handle the case where the section is shorter than viewport, we can check if scrollPosition is between top and bottom.
-                    // Also consider that for the last section, scrolling to the bottom might not reach the exact bottom due to viewport height.
-                    // So we also check if the section is the last one and we are near the bottom.
-                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                        activeSection = section;
-                    }
-                    // Special case: if we are at the very bottom of the page, force last section active
-                    if (i === sections.length - 1 && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-                        activeSection = section;
-                    }
-                }
+    <!-- EDUCATION SECTION -->
+    <section id="education">
+      <div class="container">
+        <h2>🎓 Education</h2>
+        <div class="edu-timeline">
+          <div class="edu-item">
+            <div class="edu-info">
+              <h3>B.Tech in Computer Science & Engineering</h3>
+              <div class="institute">Indian Institute of Technology, Delhi</div>
+              <div class="year">2022 – 2026 (Expected)</div>
+            </div>
+            <div class="edu-grade">CGPA: 9.2/10</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <h3>Senior Secondary (XII) – PCM + CS</h3>
+              <div class="institute">Delhi Public School, R.K. Puram</div>
+              <div class="year">2021 – 2022</div>
+            </div>
+            <div class="edu-grade">95.4%</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-info">
+              <h3>Secondary (X)</h3>
+              <div class="institute">St. Xavier's High School</div>
+              <div class="year">2019 – 2020</div>
+            </div>
+            <div class="edu-grade">97.8%</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                // If for some reason we didn't match any (e.g., scrollPosition less than first section top), fallback to first
-                // Also handle the case where the first section's top is 0, scrollPosition is 150, so it will match first.
-                // Update active class on nav links
-                const currentId = activeSection.getAttribute('id');
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${currentId}`) {
-                        link.classList.add('active');
-                    }
-                });
-            }
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <div class="container">
+        <h2>📬 Get In Touch</h2>
+        <div class="contact-flex">
+          <div class="contact-info">
+            <h3>Let's connect!</h3>
+            <p>I'm open to internships, freelance projects, and collaborations.</p>
+            <div class="contact-details">
+              <div><i class="fas fa-envelope"></i> aditya.sharma@cse.student</div>
+              <div><i class="fas fa-phone-alt"></i> +91 98765 43210</div>
+              <div><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+            </div>
+          </div>
+          <div class="social-links">
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="CodePen"><i class="fab fa-codepen"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-            // Also handle the case where the user clicks a nav link: the scroll event will fire,
-            // but we also want to update immediately after the click for responsiveness.
-            // However, smooth scroll will trigger multiple scroll events, which is fine.
-            // But to avoid flicker, we can also set active on click as a quick preview.
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Don't prevent default – we want smooth scroll.
-                    // But we can set active immediately for better UX.
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    this.classList.add('active');
-                    // The scroll event will adjust correctly once the smooth scroll finishes.
-                });
-            });
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 Aditya Sharma · CSE Portfolio · Built with <span>♥</span> and pure HTML/CSS</p>
+    </div>
+  </footer>
 
-            // Throttle the scroll event for performance (optional but nice)
-            let ticking = false;
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(function() {
-                        updateActiveLink();
-                        ticking = false;
-                    });
-                    ticking = true;
-                }
-            });
-
-            // Initial call on page load
-            window.addEventListener('load', updateActiveLink);
-            // Also call on resize because section positions may change
-            window.addEventListener('resize', updateActiveLink);
-            // Small delay to ensure everything is rendered (just in case)
-            setTimeout(updateActiveLink, 100);
-        })();
-    </script>
+  <!-- simple active nav highlight (optional, minimal JS would be needed for full dynamic, but we keep CSS only) -->
 </body>
 </html>
