@@ -3,827 +3,212 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio · ML & Django Developer</title>
-    <!-- Font Awesome 6 (free) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Centered Nav · Active on Scroll</title>
     <style>
-        /* ---------- RESET & GLOBAL ---------- */
+        /* ----- GLOBAL RESET & BASE ----- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
-            background-color: #f9fafc;
-            color: #1e293b;
-            line-height: 1.6;
-        }
-
-        /* smooth scroll */
         html {
             scroll-behavior: smooth;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* ---------- TYPOGRAPHY & LINKS ---------- */
-        h1, h2, h3 {
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.3;
-        }
-
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 1.25rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            border-radius: 2px;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ---------- BUTTONS ---------- */
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.75rem;
-            border-radius: 40px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: 1.5px solid transparent;
-        }
-
-        .btn-primary {
-            background: #2563eb;
+        body {
+            background-color:#02060E;
             color: white;
-            box-shadow: 0 8px 16px -6px rgba(37, 99, 235, 0.3);
+            padding-top: 80px;  
         }
 
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 20px -8px rgba(37, 99, 235, 0.4);
-        }
-
-        .btn-outline {
-            border: 1.5px solid #2563eb;
-            color: #2563eb;
-            background: transparent;
-        }
-
-        .btn-outline:hover {
-            background: #2563eb10;
-            transform: translateY(-2px);
-        }
-
-        /* ---------- HEADER / NAV ---------- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 1.5rem;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(12px);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            font-weight: 500;
-        }
-
-        .nav-links a {
-            font-size: 1rem;
-            color: #334155;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #2563eb;
-        }
-
-        /* ---------- HERO SECTION ---------- */
-        .hero {
-            padding: 5rem 0 4rem;
-        }
-
-        .hero-grid {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-content {
-            flex: 1 1 400px;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            background: #e0e7ff;
-            color: #2563eb;
-            font-size: 0.875rem;
-            font-weight: 600;
-            padding: 0.35rem 1rem;
-            border-radius: 100px;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.3px;
-        }
-
-        .hero-content h1 {
-            font-size: 3rem;
-            margin-bottom: 1.25rem;
-        }
-
-        .hero-highlight {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: #475569;
-            margin-bottom: 2rem;
-            max-width: 550px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item h3 {
-            font-size: 1.8rem;
-            color: #0f172a;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-item p {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 0;
-        }
-
-        .hero-avatar {
-            flex: 0 0 280px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .avatar-box {
-            width: 280px;
-            height: 280px;
-            background: linear-gradient(145deg, #dbeafe, #ede9fe);
-            border-radius: 40% 60% 30% 70% / 50% 40% 60% 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 30px 40px -20px rgba(37, 99, 235, 0.4);
-            position: relative;
-        }
-
-        .avatar-box i {
-            font-size: 7rem;
-            color: #2563eb;
-            opacity: 0.9;
-        }
-
-        /* ---------- SECTIONS (general) ---------- */
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-subtitle {
-            color: #64748b;
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            max-width: 700px;
-        }
-
-        /* ---------- SKILLS ---------- */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .skill-card {
-            background: white;
-            padding: 1.75rem 1.25rem;
-            border-radius: 24px;
-            box-shadow: 0 5px 20px -8px rgba(0, 0, 0, 0.08);
-            border: 1px solid #eef2f6;
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-align: center;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.15);
-            border-color: #cbd5e1;
-        }
-
-        .skill-card i {
-            font-size: 2.2rem;
-            color: #2563eb;
-            margin-bottom: 1rem;
-        }
-
-        .skill-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .skill-card p {
-            font-size: 0.85rem;
-            color: #64748b;
-        }
-
-        /* ---------- PROJECTS ---------- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.08);
-            border: 1px solid #eef2f6;
-            transition: all 0.25s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 40px -18px rgba(37, 99, 235, 0.2);
-            border-color: #d9e2ef;
-        }
-
-        .project-header {
-            height: 150px;
-            background: linear-gradient(135deg, #dbeafe, #ede9fe);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3.5rem;
-            color: #2563eb;
-        }
-
-        .project-body {
-            padding: 1.75rem;
-        }
-
-        .project-body h3 {
-            font-size: 1.35rem;
-            margin-bottom: 0.6rem;
-        }
-
-        .project-body p {
-            color: #475569;
-            font-size: 0.95rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tags span {
-            background: #eef2ff;
-            color: #2563eb;
-            font-size: 0.75rem;
-            font-weight: 600;
-            padding: 0.3rem 0.9rem;
-            border-radius: 30px;
-            letter-spacing: 0.2px;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-            font-weight: 500;
-            font-size: 0.9rem;
-        }
-
-        .project-links a {
-            color: #2563eb;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .project-links a i {
-            font-size: 0.8rem;
-        }
-
-        /* ---------- EXPERIENCE ---------- */
-        .exp-item {
-            background: white;
-            border-radius: 24px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 5px 15px -10px rgba(0,0,0,0.05);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            align-items: flex-start;
-        }
-
-        .exp-icon {
-            background: #e0e7ff;
-            width: 55px;
-            height: 55px;
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            color: #2563eb;
-            flex-shrink: 0;
-        }
-
-        .exp-content {
-            flex: 1;
-        }
-
-        .exp-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .exp-meta {
-            font-size: 0.9rem;
-            color: #64748b;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-        }
-
-        .exp-meta i {
-            margin-right: 0.25rem;
-            color: #2563eb;
-        }
-
-        .exp-content ul {
-            list-style: none;
-        }
-
-        .exp-content li {
-            margin-bottom: 0.6rem;
-            padding-left: 1.5rem;
-            position: relative;
-            color: #334155;
-        }
-
-        .exp-content li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: #2563eb;
-            font-weight: bold;
-        }
-
-        /* ---------- CONTACT / FOOTER ---------- */
-        .contact-section {
-            background: white;
-            border-radius: 40px;
-            padding: 3.5rem 2rem;
-            text-align: center;
-            border: 1px solid #eef2f6;
-            box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.05);
-            margin-bottom: 3rem;
-        }
-
-        .contact-section h2 {
-            margin-bottom: 1rem;
-        }
-
-        .contact-section h2::after {
+        nav {
+            position: fixed;
+            top: 20px;      
             left: 50%;
             transform: translateX(-50%);
-        }
-
-        .contact-section p {
-            color: #475569;
-            max-width: 500px;
-            margin: 0 auto 2rem;
-        }
-
-        .contact-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .contact-links a {
-            display: flex;
             align-items: center;
-            gap: 0.6rem;
+            gap: 2rem;     
+            background-color: #010101; 
+            padding: 0.9rem 2rem;
+            border: 1px solid white;
+            border-radius: 35px;
+            width: auto;
+            min-width: 320px;
+            max-width: 90vw;
+            box-shadow: 0 8px 20px rgba(255, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;               /* default link color */
             font-weight: 500;
-            color: #1e293b;
-            transition: color 0.2s;
-            background: #f1f5f9;
-            padding: 0.7rem 1.5rem;
-            border-radius: 40px;
+            letter-spacing: 0.3px;
+            font-size: 1.1rem;
+            padding: 0.25rem 0;
+            transition: color 0.2s, opacity 0.2s;
         }
 
-        .contact-links a i {
-            color: #2563eb;
-            font-size: 1.2rem;
+        /* hover stays as before */
+        nav a:hover {
+            opacity: 0.7;
+            color: red;
         }
 
-        .contact-links a:hover {
-            color: #2563eb;
-            background: #e0e7ff;
+        /* active link – when section is in view */
+        nav a.active {
+            color: #ff3b3b;            /* bright red for active link */
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+            position: relative;
         }
 
-        footer {
-            text-align: center;
-            padding: 2rem 0 3rem;
-            color: #64748b;
-            font-size: 0.9rem;
-            border-top: 1px solid #e2e8f0;
+        /* small underline indicator (optional, clean look) */
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff3b3b;
+            border-radius: 2px;
+            box-shadow: 0 0 8px #ff0000;
         }
 
-        /* ---------- RESPONSIVE ---------- */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 1rem;
-                padding: 1rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero-content h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero-grid {
-                flex-direction: column-reverse;
-                text-align: center;
-            }
-
-            .hero-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-avatar {
-                flex: 0 0 auto;
-            }
-
-            .avatar-box {
-                width: 200px;
-                height: 200px;
-            }
-
-            .avatar-box i {
-                font-size: 5rem;
-            }
-
-            h2 {
-                font-size: 1.75rem;
-            }
-
-            .exp-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .contact-links a {
-                width: 100%;
-                justify-content: center;
-            }
+        nav h1 {
+            background-color:#c50303;
+            width:auto;
+            height: auto;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
         }
 
-        @media (max-width: 480px) {
-            .hero-stats {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: center;
-            }
-
-            .hero-buttons .btn {
-                width: 100%;
-                text-align: center;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
+        #home {
+            height: 100vh;
         }
+
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="logo">dev.ml</div>
-        <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Projects</a>
-            <a href="#experience">Experience</a>
-            <a href="#contact">Contact</a>
-        </div>
+    <nav>
+        <h1>My Portfolio</h1>
+        <a href="#home" class="nav-link active">Home</a>   <!-- initially active -->
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header id="home" class="hero">
-        <div class="container hero-grid">
-            <div class="hero-content">
-                <span class="hero-badge"><i class="fas fa-code"></i> ML + Django</span>
-                <h1>
-                    Building intelligent <br>
-                    <span class="hero-highlight">web applications</span>
-                </h1>
-                <p>
-                    I'm a machine learning enthusiast and Django developer, crafting data-driven 
-                    backends and clean, scalable APIs. I turn models into products.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View projects <i class="fas fa-arrow-right" style="margin-left: 6px;"></i></a>
-                    <a href="#contact" class="btn btn-outline">Let's talk</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <h3>5+</h3>
-                        <p>ML models deployed</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>3+</h3>
-                        <p>Django projects</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>2+</h3>
-                        <p>Years coding</p>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-avatar">
-                <div class="avatar-box">
-                    <!-- <i class="fas fa-robot"></i> -->
-                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSz7Z-4BV2rAziKSe-j8k1yQLgoGSGIbmOZ1a5lI4Jqlw&s=10" alt="Avatar" style="width: 100%; height: 100%">
-                </div>
-            </div>
-        </div>
-    </header>
+    <div class="content">
+        <section id="home">
+            <h1>Home</h1>
+        </section>
 
-    <!-- SKILLS SECTION -->
-    <section id="skills">
-        <div class="container">
-            <h2>Tech stack</h2>
-            <p class="section-subtitle">Tools and technologies I work with daily — from model training to deployment.</p>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fab fa-python"></i>
-                    <h4>Python</h4>
-                    <p>Core language, OOP, scripting</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-brain"></i>
-                    <h4>Machine Learning</h4>
-                    <p>scikit-learn, TensorFlow, PyTorch</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h4>Django</h4>
-                    <p>DRF, ORM, auth, REST APIs</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h4>Data Analysis</h4>
-                    <p>Pandas, NumPy, Matplotlib</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-cloud"></i>
-                    <h4>Deployment</h4>
-                    <p>Docker, Heroku, AWS basics</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-code-branch"></i>
-                    <h4>Version Control</h4>
-                    <p>Git, GitHub, GitLab</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <section id="about">
+            <h1>About</h1>
+        </section>
+        <section id="skills">
+            <h1>Skills</h1>
+        </section>  
+        <section id="projects">
+            <h1>Projects</h1>   
+        </section>
+        <section id="contact">
+            <h1>Contact</h1>
+        </section>
+    </div>
 
-    <!-- PROJECTS SECTION -->
-    <section id="projects">
-        <div class="container">
-            <h2>Featured projects</h2>
-            <p class="section-subtitle">A blend of machine learning pipelines and Django backends.</p>
-            <div class="projects-grid">
+    <script>
+        (function() {
+            // Get all sections and nav links
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <div class="project-body">
-                        <h3>Customer Churn Predictor</h3>
-                        <p>ML model (XGBoost) + Django REST API. Predicts churn probability and returns actionable insights.</p>
-                        <div class="tech-tags">
-                            <span>Django REST</span>
-                            <span>scikit-learn</span>
-                            <span>Pandas</span>
-                            <span>PostgreSQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
+            // Function to update active class based on scroll position
+            function updateActiveLink() {
+                let currentSectionId = 'home'; // default fallback
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="project-body">
-                        <h3>Image Classifier API</h3>
-                        <p>CNN model (TensorFlow) served via Django. Upload an image and get top-3 predictions with confidence.</p>
-                        <div class="tech-tags">
-                            <span>TensorFlow</span>
-                            <span>Django</span>
-                            <span>Pillow</span>
-                            <span>Docker</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
+                // Find the section that is currently most visible in the viewport
+                // We'll use a threshold: the section whose top is closest to the top of the viewport
+                // but not past the middle, or simply the one that occupies most of the viewport.
+                // A clean approach: find the section whose top is <= window.scrollY + some offset (e.g., 150px)
+                // and whose bottom is > window.scrollY + offset.
+                const scrollPosition = window.scrollY + 150; // offset for fixed nav + breathing room
 
-                <div class="project-card">
-                    <div class="project-header">
-                        <i class="fas fa-newspaper"></i>
-                    </div>
-                    <div class="project-body">
-                        <h3>Sentiment Analyzer</h3>
-                        <p>NLP pipeline with Django backend. Analyze text sentiment (positive/negative) in real time.</p>
-                        <div class="tech-tags">
-                            <span>NLTK</span>
-                            <span>Django</span>
-                            <span>React (front)</span>
-                            <span>Redis</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#"><i class="fab fa-github"></i> Code</a>
-                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
-                        </div>
-                    </div>
-                </div>
+                // Iterate from last to first to get the *first* section that contains the scroll position
+                // Actually we want the section that contains the scroll position, if multiple, the one that started last
+                // but let's go from bottom to top to get the last matching section? 
+                // Better: loop and keep the last section whose top <= scrollPosition.
+                let activeSection = sections[0]; // default home
+                for (let i = 0; i < sections.length; i++) {
+                    const section = sections[i];
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
 
-            </div>
-        </div>
-    </section>
+                    // If the scroll position is within this section (with a little tolerance)
+                    // We use a small offset for the bottom? Actually if scrollPosition is between top and bottom, that's it.
+                    // But to handle the case where the section is shorter than viewport, we can check if scrollPosition is between top and bottom.
+                    // Also consider that for the last section, scrolling to the bottom might not reach the exact bottom due to viewport height.
+                    // So we also check if the section is the last one and we are near the bottom.
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        activeSection = section;
+                    }
+                    // Special case: if we are at the very bottom of the page, force last section active
+                    if (i === sections.length - 1 && (window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+                        activeSection = section;
+                    }
+                }
 
-    <!-- EXPERIENCE SECTION -->
-    <section id="experience">
-        <div class="container">
-            <h2>Experience</h2>
-            <p class="section-subtitle">Hands-on roles where I applied ML and Django in production.</p>
+                // If for some reason we didn't match any (e.g., scrollPosition less than first section top), fallback to first
+                // Also handle the case where the first section's top is 0, scrollPosition is 150, so it will match first.
+                // Update active class on nav links
+                const currentId = activeSection.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
 
-            <div class="exp-item">
-                <div class="exp-icon"><i class="fas fa-laptop-code"></i></div>
-                <div class="exp-content">
-                    <h3>Machine Learning Intern</h3>
-                    <div class="exp-meta">
-                        <span><i class="fas fa-building"></i> DataMinds Analytics</span>
-                        <span><i class="fas fa-calendar-alt"></i> Jun 2024 – Present</span>
-                    </div>
-                    <ul>
-                        <li>Built a recommendation engine using collaborative filtering, integrated into a Django dashboard.</li>
-                        <li>Improved model accuracy by 18% through feature engineering and hyperparameter tuning.</li>
-                        <li>Created REST endpoints to serve predictions to the frontend team.</li>
-                    </ul>
-                </div>
-            </div>
+            // Also handle the case where the user clicks a nav link: the scroll event will fire,
+            // but we also want to update immediately after the click for responsiveness.
+            // However, smooth scroll will trigger multiple scroll events, which is fine.
+            // But to avoid flicker, we can also set active on click as a quick preview.
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Don't prevent default – we want smooth scroll.
+                    // But we can set active immediately for better UX.
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    // The scroll event will adjust correctly once the smooth scroll finishes.
+                });
+            });
 
-            <div class="exp-item">
-                <div class="exp-icon"><i class="fab fa-django"></i></div>
-                <div class="exp-content">
-                    <h3>Django Developer (Freelance)</h3>
-                    <div class="exp-meta">
-                        <span><i class="fas fa-user-tie"></i> Self-employed</span>
-                        <span><i class="fas fa-calendar-alt"></i> Jan 2023 – May 2024</span>
-                    </div>
-                    <ul>
-                        <li>Developed 3+ full-stack Django apps with authentication, PostgreSQL, and REST APIs.</li>
-                        <li>Integrated ML models into Django views for real-time predictions.</li>
-                        <li>Deployed applications on Heroku and AWS EC2 with Docker.</li>
-                    </ul>
-                </div>
-            </div>
+            // Throttle the scroll event for performance (optional but nice)
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateActiveLink();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
 
-            <div class="exp-item">
-                <div class="exp-icon"><i class="fas fa-graduation-cap"></i></div>
-                <div class="exp-content">
-                    <h3>ML & Web Development Projects</h3>
-                    <div class="exp-meta">
-                        <span><i class="fas fa-folder-open"></i> Personal & academic</span>
-                        <span><i class="fas fa-calendar-alt"></i> 2022 – Present</span>
-                    </div>
-                    <ul>
-                        <li>Built a house price prediction API with Django REST and scikit-learn.</li>
-                        <li>Created a movie recommender using collaborative filtering and deployed with Flask (now migrating to Django).</li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- CONTACT / CTA -->
-    <section id="contact">
-        <div class="container">
-            <div class="contact-section">
-                <h2>Let's work together</h2>
-                <p>I'm open to full-time roles, freelance projects, and collaborations in ML + Django.</p>
-                <div class="contact-links">
-                    <a href="mailto:hello@example.com"><i class="fas fa-envelope"></i> hello@example.com</a>
-                    <a href="#"><i class="fab fa-github"></i> github/ml-django</a>
-                    <a href="#"><i class="fab fa-linkedin"></i> linkedin/in/ml-dev</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>© 2025 · ML & Django Developer Portfolio · Built with HTML & CSS</p>
-        </div>
-    </footer>
-
+            // Initial call on page load
+            window.addEventListener('load', updateActiveLink);
+            // Also call on resize because section positions may change
+            window.addEventListener('resize', updateActiveLink);
+            // Small delay to ensure everything is rendered (just in case)
+            setTimeout(updateActiveLink, 100);
+        })();
+    </script>
 </body>
 </html>
