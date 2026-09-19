@@ -117,7 +117,7 @@
     }
 
     /* ---------- HERO SECTION ---------- */
-    #hero {
+    #home {
       min-height: 85vh;
       display: flex;
       align-items: center;
@@ -125,26 +125,26 @@
       border-bottom: 1px solid var(--gray-dark);
     }
 
-    .hero-grid {
+    .home-grid {
       display: grid;
       grid-template-columns: 1fr 0.8fr;
       gap: 3rem;
       align-items: center;
     }
 
-    .hero-text h1 {
+    .home-text h1 {
       font-size: 3.5rem;
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 0.5rem;
     }
 
-    .hero-text h1 .highlight {
+    .home-text h1 .highlight {
       color: var(--red);
       text-shadow: 0 0 15px var(--red-glow);
     }
 
-    .hero-text .subtitle {
+    .home-text .subtitle {
       font-size: 1.6rem;
       color: var(--text-muted);
       margin-bottom: 1.5rem;
@@ -153,7 +153,7 @@
       padding-left: 1rem;
     }
 
-    .hero-text p {
+    .home-text p {
       font-size: 1.15rem;
       color: #cccccc;
       max-width: 550px;
@@ -202,7 +202,7 @@
       box-shadow: 0 0 15px rgba(227, 27, 35, 0.3);
     }
 
-    .hero-avatar {
+    .home-avatar {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -489,12 +489,12 @@
 
     /* ---------- RESPONSIVE ---------- */
     @media (max-width: 900px) {
-      .hero-grid {
+      .home-grid {
         grid-template-columns: 1fr;
         text-align: center;
       }
 
-      .hero-text .subtitle {
+      .home-text .subtitle {
         border-left: none;
         padding-left: 0;
         border-bottom: 2px solid var(--red);
@@ -502,7 +502,7 @@
         padding-bottom: 0.5rem;
       }
 
-      .hero-text p {
+      .home-text p {
         margin-left: auto;
         margin-right: auto;
       }
@@ -548,11 +548,11 @@
     }
 
     @media (max-width: 480px) {
-      .hero-text h1 {
+      .home-text h1 {
         font-size: 2.5rem;
       }
 
-      .hero-text .subtitle {
+      .home-text .subtitle {
         font-size: 1.3rem;
       }
 
@@ -575,7 +575,7 @@
       <div class="logo">My Portfolio</div>
       <nav>
         <ul>
-          <li><a href="#hero" class="active">Home</a></li>
+          <li><a href="#home">Home</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#education">Education</a></li>
@@ -587,12 +587,12 @@
 
   <main>
     <!-- HERO SECTION -->
-    <section id="hero">
-      <div class="container hero-grid">
-        <div class="hero-text">
-          <h1>Hi, I'm <span class="highlight">Suhail</h1>
-          <div class="subtitle">CSE Student & Developer</div>
-          <p>Passionate about problem-solving, algorithms, and building clean web experiences. Currently pursuing B.Tech in Computer Science, exploring full-stack and AI.</p>
+    <section id="home">
+      <div class="container home-grid">
+        <div class="home-text">
+          <h1>Hi, I'm <span class="highlight">Suhail</span></h1>
+          <div class="subtitle">Machine Learning Enthusiast • Python Developer</div>
+          <p>Passionate about problem-solving and building web experiences. Currently pursuing B.Tech in CSE (AI&ML)</p>
           <div class="btn-group">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a href="#contact" class="btn btn-outline">Contact Me</a>
@@ -600,7 +600,7 @@
 
           </div>
         </div>
-        <div class="hero-avatar">
+        <div class="home-avatar">
           <div class="avatar-box">
             <i class="fas fa-laptop-code"></i>
           </div>
@@ -611,36 +611,51 @@
     <!-- SKILLS SECTION (CSE FLAVOR) -->
     <section id="skills">
       <div class="container">
-        <h2>⚡ Tech Stack & Skills</h2>
+        <h2><i class="fas fa-laptop-code" style="color: red;"></i> Tech Stack & Skills</h2>
         <div class="skills-grid">
           <div class="skill-card">
             <i class="fab fa-java"></i>
             <h3>Java</h3>
-            <p>DSA, OOPs, Spring</p>
+            <p>DSA, OOPs</p>
           </div>
           <div class="skill-card">
             <i class="fab fa-python"></i>
             <h3>Python</h3>
-            <p>ML, Automation</p>
+            <p>ML libraries,DSA,OOPS</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-c" ></i>
+            <h3>C</h3>
+            <p>Fundamental Programming</p>
+          </div>
+          <div class="skill-card">
+            <i class="fab fa-html5"></i>
+            <h3>HTML/CSS</h3>
+            <p>Responsive Design, Bootstrap</p>
           </div>
           <div class="skill-card">
             <i class="fab fa-js"></i>
             <h3>JavaScript</h3>
-            <p>React, Node.js</p>
+            <p>Fundamental Programming</p>
+          </div>
+          <div class="skill-card">
+            <i class="fas fa-server" aria-hidden="true"></i>
+            <h3>Backend</h3>
+            <p>Django</p>
           </div>
           <div class="skill-card">
             <i class="fas fa-database"></i>
             <h3>DBMS</h3>
-            <p>MySQL, MongoDB</p>
+            <p>Oracle, PostgreSQL</p>
           </div>
           <div class="skill-card">
             <i class="fas fa-code-branch"></i>
             <h3>DSA</h3>
-            <p>300+ problems</p>
+            <p>250+ problems</p>
           </div>
           <div class="skill-card">
             <i class="fab fa-git-alt"></i>
-            <h3>Git & CI</h3>
+            <h3>Git & GitHub</h3>
             <p>GitHub Actions</p>
           </div>
         </div>
@@ -650,56 +665,19 @@
     <!-- PROJECTS SECTION -->
     <section id="projects" style="background-color: #0d0d0d;">
       <div class="container">
-        <h2>📁 Featured Projects</h2>
+        <h2><i class="fas fa-folder-open" style="color: red;"></i> Featured Projects</h2>
         <div class="projects-grid">
           <!-- Project 1 -->
           <div class="project-card">
             <div class="project-icon"><i class="fas fa-robot"></i></div>
-            <h3>AlgoVisualizer</h3>
-            <p>Interactive web app to visualize pathfinding algorithms (Dijkstra, A*, BFS) with adjustable speed and maze generation.</p>
+            <h3>Real-Time Chat Application</h3>
+            <p>Built a real-time chat platform with featuring user authentication, email verification via Gmail SMTP, friend management, profiles, and messaging.</p>
             <div class="tech-tags">
-              <span>React</span>
-              <span>JavaScript</span>
-              <span>CSS</span>
+              <span>Django</span>
+              <span>HTML/CSS/JavaScript</span>
+              <span>PostgreSQL</span>
             </div>
-            <a href="#" class="project-link">Live Demo <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <!-- Project 2 -->
-          <div class="project-card">
-            <div class="project-icon"><i class="fas fa-graduation-cap"></i></div>
-            <h3>StudentDB Manager</h3>
-            <p>Full-stack CRUD application to manage student records, attendance and grades. Role-based access for admin & faculty.</p>
-            <div class="tech-tags">
-              <span>Node.js</span>
-              <span>Express</span>
-              <span>MongoDB</span>
-            </div>
-            <a href="#" class="project-link">GitHub <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <!-- Project 3 -->
-          <div class="project-card">
-            <div class="project-icon"><i class="fas fa-brain"></i></div>
-            <h3>Sentiment Analyzer</h3>
-            <p>ML model that classifies movie reviews as positive/negative using NLP and logistic regression with 89% accuracy.</p>
-            <div class="tech-tags">
-              <span>Python</span>
-              <span>scikit-learn</span>
-              <span>NLTK</span>
-            </div>
-            <a href="#" class="project-link">Details <i class="fas fa-arrow-right"></i></a>
-          </div>
-          <!-- Project 4 -->
-          <div class="project-card">
-            <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
-            <h3>Weather Dashboard</h3>
-            <p>Clean dashboard showing real-time weather and 5-day forecast using OpenWeather API with dynamic backgrounds.</p>
-            <div class="tech-tags">
-              <span>HTML</span>
-              <span>CSS</span>
-              <span>JS</span>
-              <span>API</span>
-            </div>
-            <a href="#" class="project-link">Live <i class="fas fa-arrow-right"></i></a>
+            <a href="https://github.com/suhailk06/Real_Time_Chat_Messenger" class="project-link">GitHub repository link <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
       </div>
@@ -708,31 +686,31 @@
     <!-- EDUCATION SECTION -->
     <section id="education">
       <div class="container">
-        <h2>🎓 Education</h2>
+        <h2><i class="fas fa-graduation-cap" style="color: red;"></i> Education</h2>
         <div class="edu-timeline">
           <div class="edu-item">
             <div class="edu-info">
-              <h3>B.Tech in Computer Science & Engineering</h3>
-              <div class="institute">Indian Institute of Technology, Delhi</div>
-              <div class="year">2022 – 2026 (Expected)</div>
+              <h3>B.Tech in Computer Science (AI&ML)</h3>
+              <div class="institute">Mahatma Gandhi Institute of Technology</div>
+              <div class="year">2024 – 2028 (Expected)</div>
             </div>
-            <div class="edu-grade">CGPA: 9.2/10</div>
+            <div class="edu-grade">CGPA: 8.36/10</div>
           </div>
           <div class="edu-item">
             <div class="edu-info">
-              <h3>Senior Secondary (XII) – PCM + CS</h3>
-              <div class="institute">Delhi Public School, R.K. Puram</div>
-              <div class="year">2021 – 2022</div>
+              <h3>Senior Secondary (XII) MPC</h3>
+              <div class="institute">Sri Chaitanya Junior College</div>
+              <div class="year">2022 – 2024</div>
             </div>
-            <div class="edu-grade">95.4%</div>
+            <div class="edu-grade">927/1000</div>
           </div>
           <div class="edu-item">
             <div class="edu-info">
               <h3>Secondary (X)</h3>
-              <div class="institute">St. Xavier's High School</div>
-              <div class="year">2019 – 2020</div>
+              <div class="institute">Sri Chaitanya School </div>
+              <div class="year">2021 – 2022</div>
             </div>
-            <div class="edu-grade">97.8%</div>
+            <div class="edu-grade">GPA: 9.5/10</div>
           </div>
         </div>
       </div>
@@ -741,22 +719,20 @@
     <!-- CONTACT SECTION -->
     <section id="contact">
       <div class="container">
-        <h2>📬 Get In Touch</h2>
+        <h2><i class="fas fa-envelope" style="color: red;"></i> Get In Touch</h2>
         <div class="contact-flex">
           <div class="contact-info">
             <h3>Let's connect!</h3>
-            <p>I'm open to internships, freelance projects, and collaborations.</p>
+            <p>I'm open to internships, full time roles, and freelance projects.</p>
             <div class="contact-details">
-              <div><i class="fas fa-envelope"></i> aditya.sharma@cse.student</div>
-              <div><i class="fas fa-phone-alt"></i> +91 98765 43210</div>
-              <div><i class="fas fa-map-marker-alt"></i> New Delhi, India</div>
+              <div><i class="fas fa-envelope"></i>suhailkanamukkala@gmail.com</div>
+              <div><i class="fas fa-phone-alt"></i> +91 97014 62356</div>
+              <div><i class="fas fa-map-marker-alt"></i> Hyderabad, Telangana, India</div>
             </div>
           </div>
           <div class="social-links">
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="CodePen"><i class="fab fa-codepen"></i></a>
+            <a href="https://github.com/suhailk06" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kanamukkala-suhail/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
       </div>
@@ -766,7 +742,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="container">
-      <p>© 2025 Aditya Sharma · CSE Portfolio · Built with <span>♥</span> and pure HTML/CSS</p>
+      <p>© 2026 Suhail Kanamukkala · Portfolio · Built with pure HTML/CSS</p>
     </div>
   </footer>
 
